@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Cuisine Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">Shop</a>
+            <a href="/blog" style="text-decoration: none; margin-left: 1em; color: #333;">Chef's Blog</a>
+            <a href="/toggle" style="text-decoration: none; margin-left: 1em; color: #333;">(Chef/Customer)</a>
+            <a href="/create_account" class="btn" style="text-decoration: none; margin-left: 1em; color: #333; background-color: #77c38e; color: white; padding: 0.5em 1em; border-radius: 0.3em;">Create Account</a>
+            <a href="/login" class="btn" style="text-decoration: none; margin-left: 1em; color: #333; background-color: #77c38e; color: white; padding: 0.5em 1em; border-radius: 0.3em;">Login</a>
+        </div>
+    </header>
+    <div class="landing-container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+        </div>
+    <div class="form-container">
+        <form id="create-account-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="account-type">Account Type</label>
+                <select id="account-type" name="account-type" required>
+                    <option value="consumer">Consumer</option>
+                    <option value="chef">Chef</option>
+                </select>
+            </div>
+            <div class="form-group chef-only" style="display: none;">
+                <label for="business-name">Business Name</label>
+                <input type="text" id="business-name" name="business-name" required>
+            </div>
+            <div class="form-group chef-only" style="display: none;">
+                <label for="location">Business Location</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group chef-only" style="display: none;">
+                <label for="map-options">Order destination</label>
+                <select id="map-options" name="map-options" required>
+                    <option value="DeerField">Deerfield</option>
+                    <option value="CCIT">CCIT</option>
+                    <option value="Instruction Centre">IB</option>
+                    <option value="Kaneff Centre">KF</option>
+                    <option value="MN">MN</option>
+                    <option value="Davis">DV</option>
+                    <option value="HealthSci Complex">HB</option>
+                </select>
+                <div class="map-container">
+                    <img id="map-image" src="{{ url_for('static', filename='images/campus_map.png') }}" alt="Campus Map">
+                    <img id="pin-image" src="{{ url_for('static', filename='images/pin.png') }}" alt="Location Pin" style="display: none;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="profile-picture">Profile Picture</label>
+                <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+            </div>
+            <button type="submit" class="action-btn">Create Account</button>
+        </form>
+    </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/create_account.js') }}"></script>
+</body>
+</html>

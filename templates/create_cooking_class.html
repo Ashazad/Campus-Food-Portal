@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cooking Classes - Cuisine Connect</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/create_cooking_class.css') }}">
+        <script src="jquery-3.7.1.min.js"></script>
+    </head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/chef/cooking_classes" style="text-decoration: none; margin-left: 1em; color: #333;">Cooking Classes</a>
+            <a href="/chef/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">My Shop</a>
+            <a href="/blog" style="text-decoration: none; margin-left: 1em; color: #333;">Chef's Blog</a>
+            <a href="/logout" style="text-decoration: none; margin-left: 1em; color: #333;">Logout</a>
+        </div>
+    </header>
+    <div class="landing-container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+        </div>
+        <div class="form-container">
+            <h2>Create a New Cooking Class</h2>
+            <p>Got a family recipe passed down through generations? A new recipe you heard in passing? Whatever it
+                is just add it below and help countless users learn to cook the food they love to eat!
+            </p>
+            <form id="add-item-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="className">Class Name:</label>
+                    <input type="text" id="className" name="className" required>
+                </div>
+                <div class="form-group">
+                    <label for="c">Class Categories:</label><br>
+                    <select id="category" name="category" multiple required>
+                        <option value="food">Food</option>
+                        <option value="drink">Drink</option>
+                        <option value="meat">Meat</option>
+                        <option value="veggies">Veggies</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="host_chef">Class Host</label><br>
+                    <input type="text" name="host_chef" class="chef_name" value="{{ user.first_name}} {{ user.last_name }}" readonly><br>
+                </div>
+                <div class="form-group">
+                    <label for="className">Class Description:</label><br>
+                    <textarea id="description" name="description" rows="4" cols="50" placeholder="Give your class a good description..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Cover Image:</label>
+                    <input type="file" id="image_url" name="image" accept="image/*">
+                </div>
+                <div class="ingredient-desc">
+                    <h3>Ingredients</h3>
+                    <p>Include every ingredient someone needs to masterfully make your recipe!
+                        Be sure to include the units in the quantity section. Please remove any
+                        unneeded recipe boxes once you're done!
+                    </p>
+                </div>
+                <div class="form-group">
+                    <div class="shift-table">
+                        <table id="ingredients" for="ingredients" name="ingredients">
+                            <tr>
+                                <th>Ingredient Quantity</th>
+                                <th>Ingredient Name</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="quantity1" class="quantity" placeholder="e.g. 0.5 cups" required></td>
+                                <td><input type="text" name="name1" placeholder="e.g. diced apples" required></td>
+                                <td><button class="del-button" onclick="deleteRow(this);"> - </button></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button type="button" class="action-btn" value="Add another line" onclick="addRowIngredient();">Add Ingredient</button>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <h3>Recipe Steps</h3>
+                        <p> Please detail every step needed for someone to perform successfully!</p>
+                    </div>
+                    <table id="class_steps" for="class_steps" name="class_steps">
+                        <tr>
+                            <th>Step</th>
+                            <th>Procedure</th>
+                            <th>Add Image</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" name="step_num1" class="step_num"></td>
+                            <td><textarea type="text" name="procedure1" placeholder="What are we doing at this step?..."></textarea></td>
+                            <td><input type="file" name="step_url1" id="step_url" accept="image/*"></td>
+                            <td><button class="del-button" onclick="deleteRow(this);"> - </button></td>
+                        </tr>
+                    </table>
+                </div>
+                <button type="button" class="action-btn" value="Add another line" onclick="addRow();">Add Step</button>
+                <br>
+                <button type="submit" class="add-class-btn">Add Class Item</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/add_cooking_class.js') }}"></script>
+</body>
+</html>

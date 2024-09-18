@@ -1,0 +1,124 @@
+/* Global Styles */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FCF7E3; /* Background color for the entire page */
+}
+
+.landing-container, .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 2em; /* Space between the logo and the form */
+}
+
+.header img {
+    max-width: 50%; /* Adjust based on the size of your logo */
+    height: auto;
+}
+
+/* Styles for the form container */
+.form-container {
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%; /* Adjust width for smaller devices */
+    margin: 20px;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group select,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button Styling */
+.action-btn {
+    margin: 10px;
+    padding: 15px 25px;
+    font-size: 18px;
+    color: white;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.action-btn:hover {
+    background-color: #4cae4c;
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 600px) {
+    .header img {
+        max-width: 75%; /* Larger logo on smaller screens */
+    }
+
+    .form-container {
+        width: 95%;
+        padding: 1em;
+    }
+}
+/* Add this new style */
+.map-hidden {
+    display: none;
+}
+
+.map-container {
+    position: relative;
+    width: 100%; /* Ensure the map container takes the full width */
+}
+
+#map-image {
+    width: 100%;
+    height: auto;
+}
+
+#pin-image {
+    position: absolute; /* Positioned absolutely to overlay on the map image */
+    max-width: 30px; /* Size adjustments for the pin image */
+    max-height: 30px;
+    display: none; /* Initially hidden, shown when a location is selected */
+    z-index: 10; /* Ensure pin is above the map image */
+}
+
+.class-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .class-card-link  {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    bottom: 10px;
+    left: 0px;
+    width: 100%;
+  }

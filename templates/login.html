@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cuisine Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">Shop</a>
+            <a href="/blog" style="text-decoration: none; margin-left: 1em; color: #333;">Chef's Blog</a>
+            <a href="/toggle" style="text-decoration: none; margin-left: 1em; color: #333;">(Chef/Customer)</a>
+            <a href="/create_account" class="btn" style="text-decoration: none; margin-left: 1em; color: #333; background-color: #77c38e; color: white; padding: 0.5em 1em; border-radius: 0.3em;">Create Account</a>
+            <a href="/login" class="btn" style="text-decoration: none; margin-left: 1em; color: #333; background-color: #77c38e; color: white; padding: 0.5em 1em; border-radius: 0.3em;">Login</a>
+        </div>
+    </header>
+    <div class="landing-container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+        </div>
+    <div class="form-container">
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="action-btn">Login</button>
+        </form>
+    </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CuisineConnect Profile</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #FCF7E3;
+    }
+
+    header {
+      background-color: #FCF7E3;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .menu a {
+      margin-left: 1em;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .container {
+      padding: 0 15px;
+    }
+
+    .card {
+      border: 3px solid #333;
+      border-radius: 30px;
+      background-color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      background-color: transparent;
+      border-bottom: none;
+      font-weight: bold;
+      font-size: 24px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+  <div class="menu">
+      <a href="/chef/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">Home</a>
+      <a href="{{ url_for('view_profile', chef_id=chef.id) }}" style="text-decoration: none; margin-left: 1em; color: #333;">Profile</a>
+      <a href="/logout" style="text-decoration: none; margin-left: 1em; color: #333;">Logout</a>
+  </div>
+</header>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      About me:
+    </div>
+    <div class="card-body">
+      <form id="about-form" action="/chef/edit_profile" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <textarea class="form-control" id="about_me" name="about_me" style="resize: none; height: 200px;">{{ chef.about_me }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="profile">Profile Picture:</label>
+          <input type="file" class="form-control-file" id="profile" name="profile">
+        </div>
+
+        <div class="form-group">
+          <label for="food_choice1_image">Food Choice 1:</label>
+          <input type="file" class="form-control-file" id="food_choice1_image" name="food_choice1_image">
+        </div>
+
+        <div class="form-group">
+          <label for="food_choice2_image">Food Choice 2:</label>
+          <input type="file" class="form-control-file" id="food_choice2_image" name="food_choice2_image">
+        </div>
+
+        <div class="form-group">
+          <label for="food_choice3_image">Food Choice 3:</label>
+          <input type="file" class="form-control-file" id="food_choice3_image" name="food_choice3_image">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('about-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const response = await fetch('/chef/edit_profile', {
+        method: 'POST',
+        body: formData,
+    });
+
+    if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.success) {
+            window.location.href = '/chef/view_profile/' + responseData.chef_id;
+        } else {
+            console.error('An error occurred:', responseData.message);
+        }
+    } else {
+        console.error('An error occurred while updating the profile.');
+    }
+  });
+</script>
+
+</body>
+</html>

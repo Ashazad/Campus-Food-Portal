@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Marketplace - Cuisine Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/marketplace_home.css') }}">
+</head>
+<body>
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/chef/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">My Shop</a>
+            <a href="/chef/blogs" style="text-decoration: none; margin-left: 1em; color: #333;"> Chef Profiles </a>
+            <a href="{{ url_for('view_profile', chef_id=chef.id) }}" style="text-decoration: none; margin-left: 1em; color: #333;">Profile</a>
+            <a href="/chef/cooking_classes" style="text-decoration: none; margin-left: 1em; color: #333;">Classes</a>
+            <a href="/logout" style="text-decoration: none; margin-left: 1em; color: #333;">Logout</a>
+        </div>
+</header>
+<div class="landing-container">
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+    </div>
+    <div class="content">
+        <form id="filter-form" method="POST">
+            <div class="form-group">
+                <label for="diet-category">Diet Category</label>
+                <select id="diet-category" name="diet-category">
+                    <option value="none" selected>None</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="non-vegetarian">Non-Vegetarian</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="meat">Meat</option>
+                </select>
+            </div>
+            <button type="submit" class="action-btn">Filter</button>
+        </form>
+        <div>
+            <p>Start Time: {{ start_time }}</p>
+            <p>End Time: {{ end_time }}</p>
+        </div>
+    </div>
+</div>
+<div class="food-wrapper">
+    <div id="food-list-container">
+        {% if foods %}
+        {% for food in foods %}
+        <div class="food-item">
+            <img src="{{ url_for('static', filename=food.image_url) }}" alt="{{ food.foodName }}" class="food-image">
+            <div class="food-info">
+                <h3 class="food-name">{{ food.foodName | title }}</h3>
+                <p class="food-price">CAD {{ food.price }}</p>
+                <p class="food-category">Dietary category: {{ food.dietary_category | title }}</p>
+                <p class="food-chef">Created By {{ chef.first_name }} {{ chef.last_name }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No foods found.</p>
+        {% endif %}
+    </div>
+</div>
+<div>
+    <a href="{{ url_for('remove_food_item') }}" class="action-btn remove-food-item-btn">- Remove Food Item</a>
+    <a href="{{ url_for('add_food_item') }}" class="action-btn add-food-item-btn">+ Add Food Item</a>
+    <a href="{{ url_for('modify_open_hours') }}" class="action-btn modify-open-hours-btn"> Modify Open Hours</a>
+</div>
+<script src="{{ url_for('static', filename='js/chef_marketplace_home.js') }}"></script>
+</body>
+</html>

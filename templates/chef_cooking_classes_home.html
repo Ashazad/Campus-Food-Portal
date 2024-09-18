@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Classes - Cuisine Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/marketplace_home.css') }}">
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/chef/cooking_classes" style="text-decoration: none; margin-left: 1em; color: #333;">Classes</a>
+            <a href="/chef/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">My Shop</a>
+            <a href="/blog" style="text-decoration: none; margin-left: 1em; color: #333;">Chef's Blog</a>
+            <a href="/logout" style="text-decoration: none; margin-left: 1em; color: #333;">Logout</a>
+        </div>
+    </header>
+    <div class="landing-container">
+        <div class="content">
+            <form id="filter-form" method="POST">
+                <div class="form-group">
+                    <label for="class-category">Class Categories</label>
+                    <select id="class-category" name="class-category">
+                        <option value="none" selected>None</option>
+                        <option value="food">Food</option>
+                        <option value="drink">Drink</option>
+                        <option value="meat">Meat</option>
+                        <option value="veggies">Veggies</option>
+                    </select>
+                </div>
+                <button type="submit" class="action-btn">Filter</button>
+            </form>
+        </div>
+    </div>
+    <div class="food-wrapper classCard">
+        <div id="class-list-container">
+            {% if classes %}
+                {% for class in classes %}
+                <div class="class-card">
+                    <img src="{{ url_for('static', filename=class.image_url) }}" alt="{{ class.className }}" class="food-image">
+                    <div class="food-info">
+                        <h3 class="food-name">{{ class.className}}</h3>
+                        <p class="food-category">Dietary category: {{ class.category | title }}</p>
+                        <p class="food-chef">Created By {{ class.host_chef }}</p>
+                        <a href="cooking_classes/view/?search={{class.className}}" class="class-card-link"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No Classes found.</p>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <a href="{{ url_for('add_cooking_class') }}" class="action-btn add-food-item-btn">+ Add Cooking Class</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/chef_cooking_class_home.js') }}"></script>
+</body>
+</html>

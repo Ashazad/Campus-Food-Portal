@@ -1,0 +1,76 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    font-weight: bold;
+    background-color: #FCF7E3;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color:#77c38e;
+}
+
+nav .logo a {
+
+    text-decoration: none;
+    color: #77c38e; /* This will apply the color of the parent element */
+}
+
+.menu a {
+    text-decoration: none;
+    margin-left: 1em;
+    color: #333;
+}
+
+.hero {
+    text-align: center;
+    padding: 2em 2em 0em;
+    background-color: #fff;
+}
+
+.hero h1, .hero .btn {
+    margin-bottom: 0.5em; /* Adjust as needed */
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    background-color: #77c38e;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.3em;
+}
+
+.images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.images img {
+    max-width: 30%;
+    height: auto;
+    margin: 15px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    z-index: 1000; /* Ensures the footer stays above other content */
+}

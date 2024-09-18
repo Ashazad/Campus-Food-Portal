@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Class - Cuisine Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/view_class.css') }}">
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/chef/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">My Shop</a>
+            <a href="/chef/cooking_classes" style="text-decoration: none; margin-left: 1em; color: #333;">Classes</a>
+            <a href="/blog" style="text-decoration: none; margin-left: 1em; color: #333;">Chef's Blog</a>
+            <a href="/logout" style="text-decoration: none; margin-left: 1em; color: #333;">Logout</a>
+        </div>
+    </header>
+    
+    <!-- Recipe title, recipe description, author, date made, Steps, ingredients -->
+    <!-- classes -->
+    {% if classes %}
+    <main>
+        <section class="images">
+            <img src="{{ url_for('static', filename=classes.image_url) }}" alt="{{ classes.className }}" class="images">
+        </section>
+        <section class="hero">
+            <h1>{{ classes.className }}</h1>
+        </section>
+        <div class="center">
+            <h2 class="author-name" >Author: {{ all_steps.host_chef }}</h2>
+            <p class="class-desc"> {{ classes.description }} </p>
+        </div>
+        <div class="ingredients">
+            <h2>Ingredients:</h2>
+            {% if all_ingredients %}
+                <ul>
+                {% for ingredient in all_ingredients.ingredients %}
+                    <li> {{ ingredient.quantity }} {{ ingredient.name }} </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h1>No ingredients were found</h1>
+            {% endif %}
+        </div>
+        <div class="directions">
+            <h2>Directions</h2>
+            {% if all_steps %}
+                <!-- Make below a link? -->
+                <ul>
+                {% for step in all_steps.steps %}
+                    <li>
+                        <h3> Step. {{step.step_num}}:</h3>
+                        <p>{{step.procedure}}</p>
+                        {% if step.step_url %}
+                            <img src="{{ url_for('static', filename=step.step_url) }}" alt="{{ classes.className }}" class="food-image">
+                        {% endif %}
+                        </li>
+                
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h1>No steps were found</h1>
+            {% endif %}
+        </div>
+    </main>
+    {% endif %}
+    <footer>
+        <p>&copy; 2024 CuisineConnect Team</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Open Hours - CuisineConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div class="landing-container">
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+    </div>
+    <div class="content">
+        <h2>Remove Food Item</h2>
+        <form id="remove-food-item" method="POST">
+            <div class="form-group">
+                <label for="Food-Item">Food Item:</label>
+                <select id="Food-Item" name="Food-Item">
+                    {% for food in foods %}
+                    <option value="{{ food.foodID }}">{{ food.foodName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="action-btn">Remove food item</button>
+        </form>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/remove_food_item.js') }}"></script>
+</body>
+</html>

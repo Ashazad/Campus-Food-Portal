@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Cuisine Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/marketplace_home.css') }}">
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; font-weight: bold; background-color: #FCF7E3;">
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">Shop</a>
+            <a href="/cooking_classes" style="text-decoration: none; margin-left: 1em; color: #333;">Cooking Classes</a>
+            <a href="/blog" style="text-decoration: none; margin-left: 1em; color: #333;">Chef's Blog</a>
+            <a href="/toggle" style="text-decoration: none; margin-left: 1em; color: #333;">(Chef/Customer)</a>
+            <a href="/create_account" class="btn" style="text-decoration: none; margin-left: 1em; color: #333; background-color: #77c38e; color: white; padding: 0.5em 1em; border-radius: 0.3em;">Create Account</a>
+            <a href="/logout" class="btn" style="text-decoration: none; margin-left: 1em; color: #333; background-color: #77c38e; color: white; padding: 0.5em 1em; border-radius: 0.3em;">Logout</a>
+        </div>
+    </header>
+    <div class="landing-container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+        </div>
+        <div class="content">
+            <form id="filter-form" method="POST">
+                <div class="form-group">
+                    <label for="diet-category">Diet Category</label>
+                    <select id="diet-category" name="diet-category">
+                        <option value="none" selected>None</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="non-vegetarian">Non-Vegetarian</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="meat">Meat</option>
+
+                    </select>
+                </div>
+                <button type="submit" class="action-btn">Filter</button>
+            </form>
+            </div>
+    </div>
+    <div class="food-wrapper">
+        <div id="food-list-container">
+            {% if foods %}
+                {% for food in foods %}
+                <div class="food-item">
+                    <img src="{{ url_for('static', filename=food.image_url) }}" alt="{{ food.foodName }}" class="food-image">
+                    <div class="food-info">
+                        <h3 class="food-name">{{ food.foodName | title }}</h3>
+                        <p class="food-price">CAD {{ food.price }} CAD</p>
+                        <p class="food-category">Dietary category: {{ food.dietary_category | title }}</p>
+                        <p class="food-chef">Created By Chef: {{ food.chef.first_name }} {{ food.chef.last_name }}</p>
+                        <p class="food-start">Chef opening hours: {{ food.chef.start_time }} </p>
+                        <p class="food-end">Chef closing hours: {{ food.chef.end_time }} </p>
+
+                        <button class="order-btn" data-food-id="{{ food.id }}">Order</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No foods found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Popup window -->
+    <div class="popup-wrapper" id="popup-wrapper">
+        <div class="popup-content">
+            <span class="close-popup" id="close-popup">&times;</span>
+            <h2>Enter Fake Credit Card Information</h2>
+            <form id="order-form">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="Enter card number">
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
+
+                <button type="submit" class="action-btn">Submit Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/marketplace_home.js') }}"></script>
+</body>
+</html>

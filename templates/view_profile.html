@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FCF7E3;
+        }
+
+        header {
+            background-color: #FCF7E3;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .menu a {
+            margin-left: 1em;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            text-decoration: none;
+        }
+
+        .menu .active {
+            font-size: 1.1em;
+            text-decoration: none;
+        }
+
+        .food-image {
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .profile-picture {
+            width: 80%;
+            height: auto;
+            border-radius: 50%;
+            display: block;
+            margin: 10px auto;
+            margin-bottom: 150px;
+        }
+
+        .card {
+            border: 3px solid #333;
+            border-radius: 30px;
+            background-color: #fff;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" style="font-size: 1.5em; font-weight: bold;"><a href="/" style="text-decoration: none; color: #77c38e;">CuisineConnect</a></div>
+        <div class="menu">
+            <a href="/chef/marketplace_home_page" style="text-decoration: none; margin-left: 1em; color: #333;">Home</a>
+            <a href="/chef/edit_profile" style="text-decoration: none; margin-left: 1em; color: #333;">Edit Profile</a>
+            <a href="/logout" style="text-decoration: none; margin-left: 1em; color: #333;">Logout</a>
+        </div>
+    </header>
+
+    {% if current_user.is_authenticated and current_user.id == chef.id %}
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">Edit Profile</a>
+    {% endif %}
+
+    <main class="container mt-5">
+        <div class="card mb-3">
+            <div class="row g-0 justify-content-center">
+                <div class="col-md-4">
+                    {% if chef.profile_url %}
+                        <img src="{{ url_for('static', filename=chef.profile_url) }}" class="profile-picture" alt="Profile Picture">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/default_profile.png') }}" class="profile-picture" alt="Default Profile Picture">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h1 class="card-title">{{ chef.first_name }} {{ chef.last_name }}</h1>
+                        <p class="card-text" style="font-size: 1.5em;">{{ chef.about_me or 'No information provided.' }}</p> 
+                        <p>Owner of: {{chef.business_name}}, {{chef.location }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                {% for image_url in [chef.food_choice1_image_url, chef.food_choice2_image_url, chef.food_choice3_image_url] %}
+                    {% if image_url %}
+                        <div class="col-md-4">
+                            <img src="{{ url_for('static', filename=image_url) }}" class="img-fluid food-image" alt="Food Choice Image">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap@5.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

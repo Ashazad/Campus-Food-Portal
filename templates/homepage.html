@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuisineConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="/">CuisineConnect</a></div>
+            <div class="menu">
+                <a href="/marketplace_home_page">Shop</a>
+                <a href="/blog">Chef's Blog</a>
+                <a href="/chef/cooking_classes">Cooking Classes</a>
+                <a href="/create_account" class="btn" style="color: white">Create Account</a>
+                <a href="/login" class="btn" style="color: white">Login</a>
+            </div>
+        </nav>
+        <section class="hero">
+            <h1>The peer chef-consumer service you didn't know existed.</h1>
+            <a href="/chefs" class="btn">Browse available chefs</a>
+        </section>
+    </header>
+    <main>
+        <section class="images">
+            <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Preparing Food">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 CuisineConnect Team</p>
+    </footer>
+    {% if alert %}
+    <script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Unauthorized',
+        text: 'You need to log in to access the marketplace.',
+        confirmButtonText: 'Login'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/login';
+        }
+    });
+    </script>
+    {% endif %}
+</body>
+</html>

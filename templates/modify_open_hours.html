@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Open Hours - CuisineConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div class="landing-container">
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/landing_img.png') }}" alt="Cuisine Connect Logo">
+    </div>
+    <div class="content">
+        <h2>Modify Open Hours</h2>
+        <form id="modify-hours-form" method="POST">
+            <div class="form-group">
+                <label for="Starting-Time">Starting Time:</label>
+                <select id="Starting-Time" name="Starting-Time">
+                    <!-- Generate options for hours from 9 AM to 9 PM -->
+                    {% for hour in range(9, 22) %}
+                    <option value="{{ hour }}:00">{{ hour }}:00</option>
+                    {% endfor %}
+                </select>
+                <label for="ending-time">Ending Time</label>
+                <select id="ending-time" name="ending-time">
+                    <!-- Generate options for hours from 9 AM to 9 PM -->
+                    {% for hour in range(9, 22) %}
+                    <option value="{{ hour }}:00">{{ hour }}:00</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="action-btn">Update Hours</button>
+        </form>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/modify_hours.js') }}"></script>
+</body>
+</html>
