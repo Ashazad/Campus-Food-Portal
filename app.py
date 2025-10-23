@@ -27,9 +27,13 @@ import json
 
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='static')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cuisine_connect.db'
-    app.config.from_pyfile('config.py')
-    app.config['SQLALCHEMY_ECHO'] = True
+
+    # Load settings from config.py if present
+    app.config.from_pyfile('config.py', silent=True)
+
+    # Fallbacks if keys weren’t provided (keeps your existing defaults)
+    app.config.setdefault('SQLALCHEMY_DATABASE_URI', 'sqlite:///cuisine_connect.db')
+    app.config.setdefault('SQLALCHEMY_ECHO', False)
 
     # Initialize extensions
     db.init_app(app)
@@ -663,7 +667,5 @@ def create_app():
 
 
 if __name__ == '__main__':
-    
     app = create_app()
-    app.secret_key = 'jonathanchoi'
     app.run(debug=True)
